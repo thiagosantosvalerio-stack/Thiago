@@ -1,60 +1,388 @@
 
+Claro. Mantive a estrutura do seu código e mudei a paleta para azul, roxo e branco, deixando o visual mais moderno.
 
-       <!DOCTYPE html>
-       <html lang="pt-BR">
-       <head>
-         <meta charset="UTF-8">
-           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-             <title>Aprendiz Maringá</title>
-               <link rel="stylesheet" href="style.css">
-               </head>
-               <body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aprendiz Maringá</title>
 
-                 <header>
-                     <div class="logo">Aprendiz<span>Mar</span></div>
-                         <nav>
-                               <a href="#vagas">Vagas</a>
-                                     <a href="#sobre">Sobre</a>
-                                         </nav>
-                                           </header>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-                                             <section class="hero">
-                                                 <div>
-                                                       <p class="tag">OPORTUNIDADES EM MARINGÁ</p>
-                                                             <h1>Encontre seu primeiro emprego.</h1>
-                                                                   <p>Vagas de Jovem Aprendiz para começar sua carreira.</p>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7ff;
+      color: #1e293b;
+    }
 
-                                                                         <div class="search">
-                                                                                 <input id="busca" type="text" placeholder="Digite o cargo ou empresa...">
-                                                                                         <button onclick="buscarVagas()">Buscar</button>
-                                                                                               </div>
-                                                                                                   </div>
-                                                                                                     </section>
+    header {
+      background: #172554;
+      color: white;
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-                                                                                                       <main id="vagas">
-                                                                                                           <div class="titulo">
-                                                                                                                 <div>
-                                                                                                                         <p>OPORTUNIDADES</p>
-                                                                                                                                 <h2>Vagas de Jovem Aprendiz</h2>
-                                                                                                                                       </div>
-                                                                                                                                             <span id="contador"></span>
-                                                                                                                                                 </div>
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
 
-                                                                                                                                                     <div id="lista-vagas" class="vagas"></div>
-                                                                                                                                                       </main>
+    .logo span {
+      color: #a78bfa;
+    }
 
-                                                                                                                                                         <section id="sobre" class="sobre">
-                                                                                                                                                             <h2>Comece sua carreira</h2>
-                                                                                                                                                                 <p>
-                                                                                                                                                                       Encontre oportunidades de Jovem Aprendiz em Maringá
-                                                                                                                                                                             e descubra novas possibilidades para seu futuro profissional.
-                                                                                                                                                                                 </p>
-                                                                                                                                                                                   </section>
+    nav {
+      display: flex;
+      gap: 25px;
+    }
 
-                                                                                                                                                                                     <footer>
-                                                                                                                                                                                         <p>© 2026 AprendizMar — Vagas em Maringá</p>
-                                                                                                                                                                                           </footer>
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-                                                                                                                                                                                             <script src="script.js"></script>
-                                                                                                                                                                                             </body>
-                                                                                                                                                                                             </html>
+    nav a:hover {
+      color: #a78bfa;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #6d28d9);
+      color: white;
+      padding: 90px 8%;
+    }
+
+    .hero > div {
+      max-width: 750px;
+    }
+
+    .tag {
+      color: #c4b5fd;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero p:not(.tag) {
+      font-size: 19px;
+      margin-bottom: 30px;
+      color: #e0e7ff;
+    }
+
+    .search {
+      display: flex;
+      max-width: 650px;
+      background: white;
+      border-radius: 10px;
+      padding: 6px;
+    }
+
+    .search input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 15px;
+      font-size: 16px;
+      color: #1e293b;
+    }
+
+    .search button {
+      background: #7c3aed;
+      color: white;
+      border: none;
+      padding: 0 25px;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .search button:hover {
+      background: #6d28d9;
+    }
+
+    main {
+      padding: 60px 8%;
+    }
+
+    .titulo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .titulo p {
+      color: #7c3aed;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 7px;
+    }
+
+    .titulo h2 {
+      font-size: 30px;
+      color: #172554;
+    }
+
+    #contador {
+      background: #ede9fe;
+      color: #6d28d9;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .vagas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .vaga {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid #dbeafe;
+      box-shadow: 0 5px 20px rgba(30, 58, 138, 0.08);
+      transition: 0.3s;
+    }
+
+    .vaga:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(109, 40, 217, 0.15);
+    }
+
+    .vaga h3 {
+      color: #172554;
+      margin-bottom: 10px;
+    }
+
+    .vaga p {
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .vaga .botao {
+      display: inline-block;
+      margin-top: 15px;
+      background: #2563eb;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .vaga .botao:hover {
+      background: #1d4ed8;
+    }
+
+    .sobre {
+      background: #e0e7ff;
+      padding: 70px 8%;
+      text-align: center;
+    }
+
+    .sobre h2 {
+      color: #172554;
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .sobre p {
+      max-width: 650px;
+      margin: auto;
+      color: #475569;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: #172554;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 25px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 18px 5%;
+      }
+
+      .hero {
+        padding: 60px 5%;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      main {
+        padding: 45px 5%;
+      }
+
+      .titulo {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+      }
+
+      .search {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .search button {
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Aprendiz<span>Mar</span></div>
+
+    <nav>
+      <a href="#vagas">Vagas</a>
+      <a href="#sobre">Sobre</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="tag">OPORTUNIDADES EM MARINGÁ</p>
+
+      <h1>Encontre seu primeiro emprego.</h1>
+
+      <p>
+        Vagas de Jovem Aprendiz para começar sua carreira.
+      </p>
+
+      <div class="search">
+        <input
+          id="busca"
+          type="text"
+          placeholder="Digite o cargo ou empresa..."
+        >
+
+        <button onclick="buscarVagas()">
+          Buscar
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <main id="vagas">
+
+    <div class="titulo">
+      <div>
+        <p>OPORTUNIDADES</p>
+        <h2>Vagas de Jovem Aprendiz</h2>
+      </div>
+
+      <span id="contador"></span>
+    </div>
+
+    <div id="lista-vagas" class="vagas"></div>
+
+  </main>
+
+  <section id="sobre" class="sobre">
+    <h2>Comece sua carreira</h2>
+
+    <p>
+      Encontre oportunidades de Jovem Aprendiz em Maringá
+      e descubra novas possibilidades para seu futuro profissional.
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2026 AprendizMar — Vagas em Maringá</p>
+  </footer>
+
+  <script>
+    const vagas = [
+      {
+        cargo: "Jovem Aprendiz Administrativo",
+        empresa: "Empresa Exemplo",
+        local: "Maringá - PR"
+      },
+      {
+        cargo: "Jovem Aprendiz Comercial",
+        empresa: "Comercial Maringá",
+        local: "Maringá - PR"
+      },
+      {
+        cargo: "Jovem Aprendiz Atendimento",
+        empresa: "Empresa Paraná",
+        local: "Maringá - PR"
+      }
+    ];
+
+    function mostrarVagas(lista) {
+      const container = document.getElementById("lista-vagas");
+      const contador = document.getElementById("contador");
+
+      container.innerHTML = "";
+
+      contador.textContent = `${lista.length} vagas`;
+
+      if (lista.length === 0) {
+        container.innerHTML = `
+          <p>Nenhuma vaga encontrada.</p>
+        `;
+        return;
+      }
+
+      lista.forEach(vaga => {
+        container.innerHTML += `
+          <div class="vaga">
+            <h3>${vaga.cargo}</h3>
+            <p><strong>Empresa:</strong> ${vaga.empresa}</p>
+            <p><strong>Local:</strong> ${vaga.local}</p>
+
+            <a href="#" class="botao">
+              Ver vaga
+            </a>
+          </div>
+        `;
+      });
+    }
+
+    function buscarVagas() {
+      const termo = document
+        .getElementById("busca")
+        .value
+        .toLowerCase();
+
+      const resultado = vagas.filter(vaga =>
+        vaga.cargo.toLowerCase().includes(termo) ||
+        vaga.empresa.toLowerCase().includes(termo)
+      );
+
+      mostrarVagas(resultado);
+    }
+
+    mostrarVagas(vagas);
+  </script>
+
+</body>
+</html>
